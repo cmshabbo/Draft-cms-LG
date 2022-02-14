@@ -1,0 +1,668 @@
+<html><head>
+    <link rel="stylesheet" type="text/css" href="mainP.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/animation.css">
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+<!--    <link rel="stylesheet" type="text/css" href="noel5.css">-->
+<!--
+    <link rel="stylesheet" type="text/css" href="Documents/ordi/Wibbo/City/DraftCity/site/Site/httpdocs/noel.css">
+    <link rel="stylesheet" type="text/css" href="Documents/ordi/Wibbo/City/DraftCity/site/Site/httpdocs/noel.css">
+-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+<div id="loading" style="display: none;">
+<div class="cnt">
+<div class="dk animated tada infinite"></div>
+</div>
+</div>
+            <div class="modal fade" id="logreg" role="dialog">
+            <div style="position:relative;height:100%;overflow:hidden;">
+                <button style="float:right;background:transparent;border:none;position:relative;top:50px;right:50px;width:100px;height:100px" class="close" data-dismiss="modal"><img src="imgs/croix1.png"></button>
+
+                <!-- REGISTER -->
+                <div id="register_div" style="position: absolute; left: 50%; margin-left: -200px; width: 400px; height: 600px; top: -700px;">
+
+                    <div style="position:relative;top:70px;left:50%;margin-left:-200px;width:100%;height:100%;display: flex;justify-content: center;flex-direction: column;">
+                        <h1 style="color:white;margin-bottom:10px">Inscris-toi et rejoins nous..</h1>
+                        <div>
+                            <div class="security_pasbon" id="register_error_box" style="display:none">
+                                <img class="img_pasbon" src="imgs/pointaxe.png">
+                                <p id="register_error_msg">Les mots de passes ne correspond pas.</p>
+                            </div>
+                            <div class="inputui">
+                                <input type="text" id="register_pseudo_input" placeholder="Ton pseudo">
+                                <label for="Pseudo" id="register_pseudo_label" class="input_img" style="background-image:url(https://api.habbocity.me/avatar_image.php?user=Hastym&amp;direction=2&amp;head_direction=2&amp;headonly=1&amp;gesture=sml&amp;size=n)"></label>
+                            </div>
+                            <div class="inputui">
+                                <input id="register_mail_input" type="mail" placeholder="Entre ton E-mail">
+                                <label for="mail" class="input_img" style="left:10px;top:15px">
+                                    <img src="imgs/mail.png">
+                                </label>
+                            </div>
+                            <div class="inputui">
+                                <input type="password" id="register_password_mdp1" placeholder="Créer un mot de passe">
+                                <label for="mdp" class="input_img" style="left:10px;top:4px">
+                                    <img src="imgs/cadena_open.png">
+                                </label>
+                            </div>
+                            <div class="inputui">
+                                <input type="password" id="register_password_mdp2" placeholder="Confirme ton mot de passe">
+                                <label for="mdp2" class="input_img" style="left:10px;top:5px">
+                                    <img src="imgs/cadena_conf.png">
+                                </label>
+                            </div>
+                            <button id="register_validbutton" class="button_co" style="width:100%;">Confirmation</button>
+                        </div>
+                        <div onclick="logreg_slide('#register_div', '#login_div')" style="color:white;cursor:pointer;"><u>Je suis déjà inscris, je veux me
+                                connecter!</u></div>
+                    </div>
+                </div>
+
+
+                <!-- CONNECTION -->
+
+                <div id="login_div" style="position: absolute; left: 50%; margin-left: -200px; width: 400px; height: 600px; top: -700px;">
+
+                    <div style="position:relative;top:90px;left:50%;margin-left:-200px;width:100%;height:400px;display: flex;justify-content: center;flex-direction: column;">
+                        <h1 style="color:white;margin-bottom:10px">Connecte-toi maintenant..</h1>
+                        <div>
+                        <!--<form method="post" action="?do=connect" ?>-->
+                            <div class="security_pasbon" id="login_error_box" style="display:none">
+                                <img class="img_pasbon" src="imgs/pointaxe.png">
+                                <p id="login_error_msg">Le pseudo ou le mot de passe ne correspont pas.</p>
+                            </div>
+                            <div class="inputui">
+                                <input type="text" id="login_pseudo_input" placeholder="Ton pseudo">
+                                <label for="Pseudo" id="login_pseudo_label" class="input_img" style="background-image:url(https://api.habbocity.me/avatar_image.php?user=proga&amp;direction=2&amp;head_direction=2&amp;headonly=1&amp;gesture=sml&amp;size=n)"></label>
+                            </div>
+                            <div class="inputui">
+                                <input type="password" id="login_password_input" placeholder="Ton mot de passe">
+                                <label for="Pseudo" class="input_img" style="left:10px;top:5px">
+                                    <img src="imgs/cadena.png">
+                                </label>
+                            </div>
+                            <button id="login_validbutton" class="button_co" style="width:100%;">Se connecter</button>
+                        <!--</form>-->
+                        </div>
+                        <div onclick="logreg_slide('#login_div', '#register_div')" style="color:white;cursor:pointer;"><u>Tu n'es pas encore inscris? Cliques
+                                ici!</u></div>
+                    </div>
+                </div>
+
+                <script>
+                    // script pour faire slider ce beau monde ^^
+                    function openLogin() {
+                        var div = $('#login_div')[0];
+                        div.style['display'] = 'block';
+                        div.style['top'] = '0px';
+                        
+                        div = $('#register_div')[0];
+                        div.style['display'] = 'none';
+                        div.style['top'] = '100%';
+                    }
+                    function openInscri() {
+                        var div = $('#register_div')[0];
+                        div.style['display'] = 'block';
+                        div.style['top'] = '0px';
+                        
+                        div = $('#login_div')[0];
+                        div.style['display'] = 'none';
+                        div.style['top'] = '100%';
+                    }
+                    function logreg_slide(first, second) {
+                        var first = $(first),
+                            second = $(second);
+
+                        var h = (screen.height)+'px'
+
+                        first[0].style['top'] = '0px';
+                        second[0].style['top'] = h;
+
+                        first[0].style['display'] = second[0].style['display'] = 'block';
+
+                        first.animate({ top: '-'+h }, 300, () => {
+                            first[0].style['display'] = 'none';
+                        });
+                        second.animate({ top: '0px' }, 300);
+                    }
+
+
+                </script>
+
+                <script>
+                    /* SCRIPT POUR LA CONNECTION */
+                    var LOGINFORM = {
+                        error: {
+                            box: $('#login_error_box')[0],
+                            msg: $('#login_error_msg')[0]
+                        },
+                        pseudo: {
+                            input: $('#login_pseudo_input')[0],
+                            label: $('#login_pseudo_label')[0]
+                        },
+                        password: {
+                            input: $('#login_password_input')[0]
+                        },
+                        button: $('#login_validbutton')[0],
+
+                        showError: function (error_msg) {
+                            LOGINFORM.error.box.style='';
+                            LOGINFORM.error.msg.innerHTML = error_msg.join('<br/>');
+                        },
+                        onPseudoChange: function () {
+                            var pseudo = LOGINFORM.pseudo.input.value;
+                            LOGINFORM.pseudo.label.style['background-image'] = 'url(https://api.habbocity.me/avatar_image.php?user='+pseudo+'&direction=2&head_direction=2&headonly=1&gesture=sml&size=n)';
+                        },
+
+                        onButtonClick: function () {
+                            var pseudo = LOGINFORM.pseudo.input.value;
+                            var password = LOGINFORM.password.input.value;
+
+                            if (pseudo.length < 2)
+                                LOGINFORM.showError(['le pseudo est incorrect.']);
+                            else if (password.length == 0)
+                                LOGINFORM.showError(['le mot de passe est incorrect.']);
+                            else $.ajax({
+                                type: 'POST',
+                                url: 'module/connect.php',
+                                data: {
+                                    'action': 'login',
+                                    'pseudo': pseudo, 
+                                    'password': password
+                                },
+                                success: function(msg){
+                                    /* traitement de la reponse du serveur */
+                                    if (msg == 'SUCCESS') location.reload();
+                                    else if (msg == 'BAN') LOGINFORM.showError(['Vous avez été bannis...']);
+                                    else LOGINFORM.showError(['Pseudo ou mot de passe incorrect.']);
+                                }
+                            });
+                        }
+                    };
+
+                    LOGINFORM.pseudo.input.addEventListener('keydown', function (k) {
+                        setTimeout(LOGINFORM.onPseudoChange, 1);
+                    });
+                    LOGINFORM.button.addEventListener('click', LOGINFORM.onButtonClick );
+                    LOGINFORM.pseudo.input.addEventListener('keydown', function (k) {
+                        /* passage au champs suivant lors de l'appui sur la touche entrée */
+                        if (k.keyCode == 13) LOGINFORM.password.input.focus();
+                    });
+                    LOGINFORM.password.input.addEventListener('keydown', function (k) {
+                        /* connection lors de l'appui sur la touche entrée */
+                        if (k.keyCode == 13) LOGINFORM.onButtonClick();
+                    });
+
+                    /* SCRIPT POUR LA CREATION DE COMPTE */
+                    var EMAIL_VERIF_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+                    var REGISTERFORM = {
+                        error: {
+                            box: $('#register_error_box')[0],
+                            msg: $('#register_error_msg')[0]
+                        },
+                        pseudo: {
+                            input: $('#register_pseudo_input')[0],
+                            label: $('#register_pseudo_label')[0]
+                        },
+                        mail: $('#register_mail_input')[0],
+                        password: {
+                            mdp1: $('#register_password_mdp1')[0],
+                            mdp2: $('#register_password_mdp2')[0],
+                        },
+                        button: $('#register_validbutton')[0],
+
+
+                        showError: function (error_msg) {
+                            REGISTERFORM.error.box.style='';
+                            REGISTERFORM.error.msg.innerHTML = error_msg.join('<br/>');
+                        },
+                        onPseudoChange: function () {
+                            var pseudo = REGISTERFORM.pseudo.input.value;
+                            REGISTERFORM.pseudo.label.style['background-image'] = 'url(https://api.habbocity.me/avatar_image.php?user='+pseudo+'&direction=2&head_direction=2&headonly=1&gesture=sml&size=n)';
+                        },
+
+                        onButtonClick: function () {
+                            var pseudo = REGISTERFORM.pseudo.input.value;
+                            var mail = REGISTERFORM.mail.value;
+                            var password = REGISTERFORM.password.mdp1.value;
+                            var password_bis = REGISTERFORM.password.mdp2.value;
+
+                            if (pseudo.length < 2)
+                                REGISTERFORM.showError(['le pseudo doit faire au minimum 3 caractères.']);
+                            else if (password.length < 8)
+                                REGISTERFORM.showError(['le mot de passe doit faire au minimum 8 caractères.']);
+                            else if (password != password_bis)
+                                REGISTERFORM.showError(['les mots de passe ne correspondent pas.']);
+                            else if (!EMAIL_VERIF_REGEXP.test(mail))
+                                REGISTERFORM.showError(['format de l\'adresse e-mail est incorrect.']);
+                            else $.ajax({
+                                type: 'POST',
+                                url: 'module/connect.php',
+                                data: {
+                                    'action': 'register',
+                                    'mail': mail,
+                                    'pseudo': pseudo,
+                                    'password': password
+                                },
+                                success: function(msg){
+                                    /* traitement de la reponse du serveur */
+                                    if (msg == 'SUCCESS') location.reload();
+                                    else if (msg == 'ERREUR_PSEUDO_AU') REGISTERFORM.showError(['Le pseudo est déjà utilisé.']);
+                                    else if (msg == 'ERREUR_MAIL_AU') REGISTERFORM.showError(['Le mail est déjà utilisé.']);
+                                    else REGISTERFORM.showError(['Le mail est déjà utilisé.']);
+                                }
+                            });
+                        }
+                    };
+
+                    REGISTERFORM.pseudo.input.addEventListener('keydown', function (k) {
+                        setTimeout(REGISTERFORM.onPseudoChange, 1);
+                    });
+                    REGISTERFORM.button.addEventListener('click', REGISTERFORM.onButtonClick );
+                    
+                    
+                    /* passage au champs suivant lors de l'appui sur la touche entrée */
+                    REGISTERFORM.pseudo.input.addEventListener('keydown', function (k) { if (k.keyCode == 13) REGISTERFORM.mail.focus(); });
+                    REGISTERFORM.mail.addEventListener('keydown', function (k) { if (k.keyCode == 13) REGISTERFORM.password.mdp1.focus(); });
+                    REGISTERFORM.password.mdp1.addEventListener('keydown', function (k) { if (k.keyCode == 13) REGISTERFORM.password.mdp2.focus(); });
+                    
+                    /* connection lors de l'appui sur la touche entrée */
+                    REGISTERFORM.password.mdp2.addEventListener('keydown', function (k) {
+                        if (k.keyCode == 13) REGISTERFORM.onButtonClick();
+                    });
+                </script>
+            </div>
+        </div>
+        <div class="haut_page" style="background-repeat:repeat-x;height:130px;padding-top:70px;">
+        <section>
+            <div class="box_left">
+                <h1 style="font-size:500%;top:-20px;position:absolute;color:white"><img src="./imgs/logo.png" alt="Logo DraftCity" title="Logo Draft" style="margin-top: -40px;"><!--DraftCity--></h1>
+            </div>
+            <div class="box_right" style="position: relative;">
+                                    <button class="button_co" type="button" data-toggle="modal" data-target="#logreg" onmousedown="openLogin();">
+                        <div class="img_co"></div>Connexion
+                    </button>
+                    <button class="button_in" type="button" data-toggle="modal" data-target="#logreg" onmousedown="openInscri();">Inscription</button>
+                            </div>
+        </section>
+    </div>
+    <div class="topnav" id="myTopnav">
+        <section>
+            <a href="/"><img style="position:absolute;left:30px;filter:drop-shadow(1px 1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(1px -1px 0 #fff) drop-shadow(-1px -1px 0 #fff);margin-right:10px" src="imgs/home.png">Accueil</a>
+            <a href="articles"><img style="position:absolute;left:20px;filter:drop-shadow(1px 1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(1px -1px 0 #fff) drop-shadow(-1px -1px 0 #fff);margin-right:10px;margin-top:-3px" src="imgs/note.png">Articles</a>
+            <a href="team"><img style="position:absolute;left:10px;top:20px;filter:drop-shadow(1px 1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(1px -1px 0 #fff) drop-shadow(-1px -1px 0 #fff);margin-right:10px;margin-top:-3px" src="imgs/equipe.png">équipe</a>
+            <a href="partenaire"><img style="position:absolute;left:20px;top:15px;filter:drop-shadow(1px 1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(1px -1px 0 #fff) drop-shadow(-1px -1px 0 #fff);margin-right:10px;margin-top:-3px" src="imgs/part.png">Partenaires</a>
+            <a href="support"><img style="position:absolute;left:25px;top:27px;filter:drop-shadow(1px 1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(1px -1px 0 #fff) drop-shadow(-1px -1px 0 #fff);margin-right:10px;margin-top:-3px" src="imgs/support.png">Support</a>
+<!--
+			<a href="recrutement.php"><img
+                    style="position:absolute;left:25px;top:15px;filter:drop-shadow(1px 1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(1px -1px 0 #fff) drop-shadow(-1px -1px 0 #fff);margin-right:10px;margin-top:-3px"
+                    src="imgs/staff.png" />Recrutements</a>
+-->
+			<a href="goodies.php"><img style="position:absolute;left:15px;top:15px;filter:drop-shadow(1px 1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(1px -1px 0 #fff) drop-shadow(-1px -1px 0 #fff);margin-right:10px;margin-top:-3px" src="imgs/goodies.png">Goodies</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <img src="imgs/menu-icone.png">
+            </a>
+        </section>
+    </div><title>DraftCity - Accueil</title>
+<meta name="title" content="DraftCity">
+<meta name="description" content="DraftCity, le fansite d'HabboCity où tu trouveras toute l'actualité lié au rétro-serveur, ainsi que des tutoriels, des concours, des événements... Un fansite créé par des joueurs pour les joueurs! Rejoins nous vite!">
+<meta property="og:url" content="https://draftcity.me">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DraftCity">
+<meta property="og:description" content="DraftCity, le fansite d'HabboCity où tu trouveras toute l'actualité lié au rétro-serveur, ainsi que des tutoriels, des concours, des événements... Un fansite créé par des joueurs pour les joueurs! Rejoins nous vite!">
+<meta property="og:image" content="https://i.imgur.com/11Mo9kt.png">
+
+<style>
+
+    .img_slider {
+        width:100%;
+        height:100%;
+        position:relative;
+    }
+
+</style>
+<header>
+    <section>
+        <div class="clear">
+            
+            <div class="inscrit_information">
+                <div class="clear_2">
+                    <div class="bbox_inscris fondIns">
+                        <p>Derniers<br>inscrits</p>
+                    </div>
+                                        <a href="./profil-Langlam">
+                        <div class="bbox_inscris">
+                            <div class="inscrisui">
+                                <div class="img_inscris" style="background-image:url( https://api.habbocity.me/avatar_image.php?user=Langlam&amp;direction=2&amp;head_direction=3&amp;gesture=sml&amp;size=l);">
+                                </div>
+                                <div class="inscris_pseudo">
+                                    <h1>Langlam</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                                        <a href="./profil-Nagini">
+                        <div class="bbox_inscris">
+                            <div class="inscrisui">
+                                <div class="img_inscris" style="background-image:url( https://api.habbocity.me/avatar_image.php?user=Nagini&amp;direction=2&amp;head_direction=3&amp;gesture=sml&amp;size=l);">
+                                </div>
+                                <div class="inscris_pseudo">
+                                    <h1>Nagini</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                                        <a href="./profil-Nelia">
+                        <div class="bbox_inscris">
+                            <div class="inscrisui">
+                                <div class="img_inscris" style="background-image:url( https://api.habbocity.me/avatar_image.php?user=Nelia&amp;direction=2&amp;head_direction=3&amp;gesture=sml&amp;size=l);">
+                                </div>
+                                <div class="inscris_pseudo">
+                                    <h1>Nelia</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <!--
+                    <div class="bbox_information">
+                        <div class="informationui">
+                            <img src="imgs/infor.gif" alt="" style="position:absolute;left:20px;" /><h1 style="padding-left: 20px;padding-top: 5px;">Information de </h1><br />
+                        </div>
+                        <p class="information_text"></p>
+                    </div>
+-->
+                                        <div class="bbox_information">
+                        <div class="informationui">
+                            <img src="imgs/infor.gif" alt="" style="position:absolute;left:20px;"><h1 style="padding-left: 20px;padding-top: 5px;">Information de Nox</h1><br>
+                        </div>
+                        <p class="information_text">Nous avons mis à jour ton site favori pour le plaisir de tes yeux ! Nous espérons que cette nouvelle version te plaira :)</p>
+                    </div>                         
+                                        <div class="bbox_information" style="background: #16a085; color: #fff;">
+                        <div class="informationui">
+                            <img src="https://www.habborator.org/archive/icons/medium/v24_2.gif" alt="" style="position:absolute;left:20px;filter: drop-shadow(1px 1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(1px -1px 0 #fff) drop-shadow(-1px -1px 0 #fff);"><h1 style="padding-left: 20px;padding-top: 5px;">Top commentaires</h1>
+                        </div>
+                    <ul class="rank" id="siteRank">
+                                        <li>
+                        <div class="avatar"><img src="https://api.habbocity.me/avatar_image.php?user=Liew&amp;headonly=1&amp;direction=3&amp;head_direction=3&amp;size=n"></div>
+                        <div>
+                            <div class="name">Liew</div>
+                            <div class="msg">50 messages</div>
+                        </div>
+                    </li>
+                                        <li>
+                        <div class="avatar"><img src="https://api.habbocity.me/avatar_image.php?user=KimLoan&amp;headonly=1&amp;direction=3&amp;head_direction=3&amp;size=n"></div>
+                        <div>
+                            <div class="name">KimLoan</div>
+                            <div class="msg">30 messages</div>
+                        </div>
+                    </li>
+                                        <li>
+                        <div class="avatar"><img src="https://api.habbocity.me/avatar_image.php?user=Hypure&amp;headonly=1&amp;direction=3&amp;head_direction=3&amp;size=n"></div>
+                        <div>
+                            <div class="name">Hypure</div>
+                            <div class="msg">19 messages</div>
+                        </div>
+                    </li>
+                                        <li>
+                        <div class="avatar"><img src="https://api.habbocity.me/avatar_image.php?user=Kinward&amp;headonly=1&amp;direction=3&amp;head_direction=3&amp;size=n"></div>
+                        <div>
+                            <div class="name">Kinward</div>
+                            <div class="msg">19 messages</div>
+                        </div>
+                    </li>
+                                        <li>
+                        <div class="avatar"><img src="https://api.habbocity.me/avatar_image.php?user=Sowford&amp;headonly=1&amp;direction=3&amp;head_direction=3&amp;size=n"></div>
+                        <div>
+                            <div class="name">Sowford</div>
+                            <div class="msg">18 messages</div>
+                        </div>
+                    </li>
+                                        <li>
+                        <div class="avatar"><img src="https://api.habbocity.me/avatar_image.php?user=Lucas&amp;headonly=1&amp;direction=3&amp;head_direction=3&amp;size=n"></div>
+                        <div>
+                            <div class="name">Lucas</div>
+                            <div class="msg">11 messages</div>
+                        </div>
+                    </li>
+                                        </ul>
+                    <ul class="rank" id="mobileRank">
+                                        <li>
+                        <div class="avatar"><img src="https://api.habbocity.me/avatar_image.php?user=Liew&amp;headonly=1&amp;direction=3&amp;head_direction=3&amp;size=n"></div>
+                        <div>
+                            <div class="name">Liew</div>
+                            <div class="msg">50 messages</div>
+                        </div>
+                    </li>
+                                        <li>
+                        <div class="avatar"><img src="https://api.habbocity.me/avatar_image.php?user=KimLoan&amp;headonly=1&amp;direction=3&amp;head_direction=3&amp;size=n"></div>
+                        <div>
+                            <div class="name">KimLoan</div>
+                            <div class="msg">30 messages</div>
+                        </div>
+                    </li>
+                                        <li>
+                        <div class="avatar"><img src="https://api.habbocity.me/avatar_image.php?user=Hypure&amp;headonly=1&amp;direction=3&amp;head_direction=3&amp;size=n"></div>
+                        <div>
+                            <div class="name">Hypure</div>
+                            <div class="msg">19 messages</div>
+                        </div>
+                    </li>
+                                        </ul>
+                </div>   
+                </div>
+            </div>
+            <div class="slidershow">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                                    <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+                                                    <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+                                                    <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+                                            </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                                                    <div class="item" onclick="window.open('https://discord.gg/T9TdyrqCtA');" style="cursor:pointer;">
+                                <!-- https://www.habbocity.me/swfs/c_images/upload/Me37E2WDdx6Po0G.gif -->
+                                <div class="img_slider" alt="">
+                                    <div style="background-image:url(https://i.imgur.com/oQW2Rr7.png);width:100%;height:100%;position:absolute;background-size:cover;"></div>
+                                </div>
+                            </div>
+                                                    <div class="item active" onclick="window.open('https://www.instagram.com/draftcity.me/');" style="cursor:pointer;">
+                                <!-- https://www.habbocity.me/swfs/c_images/upload/Me37E2WDdx6Po0G.gif -->
+                                <div class="img_slider" alt="">
+                                    <div style="background-image:url(https://i.imgur.com/HEpTYzc.png);width:100%;height:100%;position:absolute;background-size:cover;"></div>
+                                </div>
+                            </div>
+                                                    <div class="item" onclick="window.open('https://twitter.com/draftcityfr');" style="cursor:pointer;">
+                                <!-- https://www.habbocity.me/swfs/c_images/upload/Me37E2WDdx6Po0G.gif -->
+                                <div class="img_slider" alt="">
+                                    <div style="background-image:url(https://i.imgur.com/booVZiC.png);width:100%;height:100%;position:absolute;background-size:cover;"></div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>
+<div class="blocnews"><div class="imgB"></div>
+<section style="overflow: hidden;">
+<div class="clear_3">
+        <div class="index5">
+            <img class="img_articleac" src="imgs/img_articleac.png">
+            <h1>Nouveautés</h1>
+        </div>
+                <a href="./article-343">
+            <div class="bbox_article" style="background-image: url(https://media.discordapp.net/attachments/730855191066443947/940680520566722630/banniere_carp2.png);">
+                <div class="article_filtre"></div>
+                <div class="article_partleft">
+                    <div class="img_article" style="background-image: url( https://api.habbocity.me/avatar_image.php?user=Carp&amp;headonly=1&amp;direction=2&amp;head_direction=3&amp;gesture=sml&amp;size=n);">
+                    </div>
+                    <p class="article_pseudo">Par <b>Carp</b></p>
+                </div>
+                <div class="article_partright">
+                    <p class="article_vu_number">14</p>
+                    <div class="img_vu"></div>
+                </div>
+                <div class="article_part_bottom">
+                    <h1>Arcane : une série à succès</h1>
+                    <div class="img_heure"></div>
+                    <p>Le 2022-02-12 09:26:31</p>
+                </div>
+            </div>
+        </a>
+                <a href="./article-339">
+            <div class="bbox_article" style="background-image: url(https://cdn.discordapp.com/attachments/730855191066443947/939227414314225725/banniere_peche.png);">
+                <div class="article_filtre"></div>
+                <div class="article_partleft">
+                    <div class="img_article" style="background-image: url( https://api.habbocity.me/avatar_image.php?user=Eralio&amp;headonly=1&amp;direction=2&amp;head_direction=3&amp;gesture=sml&amp;size=n);">
+                    </div>
+                    <p class="article_pseudo">Par <b>Eralio</b></p>
+                </div>
+                <div class="article_partright">
+                    <p class="article_vu_number">17</p>
+                    <div class="img_vu"></div>
+                </div>
+                <div class="article_part_bottom">
+                    <h1>La pêche, cette boucherie</h1>
+                    <div class="img_heure"></div>
+                    <p>Le 2022-02-09 20:34:43</p>
+                </div>
+            </div>
+        </a>
+                <a href="./article-342">
+            <div class="bbox_article" style="background-image: url(https://i.imgur.com/ncdaZKP.png);">
+                <div class="article_filtre"></div>
+                <div class="article_partleft">
+                    <div class="img_article" style="background-image: url( https://api.habbocity.me/avatar_image.php?user=Volagal&amp;headonly=1&amp;direction=2&amp;head_direction=3&amp;gesture=sml&amp;size=n);">
+                    </div>
+                    <p class="article_pseudo">Par <b>Volagal</b></p>
+                </div>
+                <div class="article_partright">
+                    <p class="article_vu_number">8</p>
+                    <div class="img_vu"></div>
+                </div>
+                <div class="article_part_bottom">
+                    <h1>L'histoire de la saga Halo</h1>
+                    <div class="img_heure"></div>
+                    <p>Le 2022-02-07 20:44:16</p>
+                </div>
+            </div>
+        </a>
+            </div>
+    <div class="clear_3">
+        <div class="index5">
+            <img class="img_articleac" src="imgs/netflix.png" style="border-radius: 50%;">
+            <h1>Dernières émissions</h1>
+        </div>
+                            <a href="https://www.youtube.com/watch?v=pCtKMIYPc7w">
+                        <div class="bbox_article" style="background-image: url(https://i.ytimg.com/vi/pCtKMIYPc7w/mqdefault.jpg);">
+                            <div class="article_filtre"></div>
+                            <!--<div class="article_partleft">
+                                <div class="img_article"
+                                    style="background-image: url(https://draftcity.me/avatarimage.php?user=&headonly=1&amp;direction=2&amp;head_direction=3&amp;gesture=sml&amp;size=n);">
+                                </div>
+                                <p class="article_pseudo">Par <b></b></p>
+                            </div>-->
+                            <!--<div class="article_partright">
+                                <p class="article_vu_number"></p>
+                                <div class="img_vu"></div>
+                            </div>-->
+                            <div class="article_part_bottom">
+                                <h1>LE DRAFTJOURNAL #1 - 02/10/2021</h1>
+                                <div class="img_heure"></div>
+                                <p>Le 02/10/2021</p>
+                            </div>
+                        </div>
+                    </a>
+                                        <a href="https://www.youtube.com/watch?v=XO_xI4kJA04">
+                        <div class="bbox_article" style="background-image: url(https://i.ytimg.com/vi/XO_xI4kJA04/mqdefault.jpg);">
+                            <div class="article_filtre"></div>
+                            <!--<div class="article_partleft">
+                                <div class="img_article"
+                                    style="background-image: url(https://draftcity.me/avatarimage.php?user=&headonly=1&amp;direction=2&amp;head_direction=3&amp;gesture=sml&amp;size=n);">
+                                </div>
+                                <p class="article_pseudo">Par <b></b></p>
+                            </div>-->
+                            <!--<div class="article_partright">
+                                <p class="article_vu_number"></p>
+                                <div class="img_vu"></div>
+                            </div>-->
+                            <div class="article_part_bottom">
+                                <h1>DRAFT'HEBDO 9 - HABBOCITY, LES NOUVEAUTÉS</h1>
+                                <div class="img_heure"></div>
+                                <p>Le 03/08/2021</p>
+                            </div>
+                        </div>
+                    </a>
+                                        <a href="https://www.youtube.com/watch?v=ZY7GvoN_lnQ">
+                        <div class="bbox_article" style="background-image: url(https://i.ytimg.com/vi/ZY7GvoN_lnQ/mqdefault.jpg);">
+                            <div class="article_filtre"></div>
+                            <!--<div class="article_partleft">
+                                <div class="img_article"
+                                    style="background-image: url(https://draftcity.me/avatarimage.php?user=&headonly=1&amp;direction=2&amp;head_direction=3&amp;gesture=sml&amp;size=n);">
+                                </div>
+                                <p class="article_pseudo">Par <b></b></p>
+                            </div>-->
+                            <!--<div class="article_partright">
+                                <p class="article_vu_number"></p>
+                                <div class="img_vu"></div>
+                            </div>-->
+                            <div class="article_part_bottom">
+                                <h1>DRAFTCITY - INTERVIEW DE SEBALU</h1>
+                                <div class="img_heure"></div>
+                                <p>Le 25/06/2021</p>
+                            </div>
+                        </div>
+                    </a>
+                        </div>
+</section>
+<footer>
+    <div class="image_sitefan"></div>
+    <div class="footer_left">
+        <p class="footer_text">Notre site de fans est un projet indépendant à but non lucratif.</p>
+		<p class="footer_text">DraftCity n'est pas affilié avec, soutenu, sponsorisé, ou spécifiquement approuvé par Sulake Oy ou ses affiliés.</p>
+        <p class="footer_text">Copyright © DraftCity 2022</p>
+    </div>
+<!--
+    <div class="image_perso_footer"
+        style="background-image: url(https://api.habbocity.me/avatar_image.php?user=Nox&direction=2&head_direction=3&headonly=1&gesture=sml&size=l); right: 180px;">
+    </div>
+    <div class="pseudo_perso_footer" style="right: 230px;">
+        <p>Nox</p>
+    </div>
+-->
+    <div class="image_perso_footer" style="background-image: url(https://api.habbocity.me/avatar_image.php?user=Hastym&amp;direction=2&amp;head_direction=3&amp;headonly=1&amp;gesture=sml&amp;size=l)">
+    </div>
+    <div class="pseudo_perso_footer">
+        <p>Hastym</p>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--<script type="text/javascript" src="js/jquery.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript">
+function loadGo() {
+	
+	document.getElementById("loading").style.display = "none";
+	
+}
+
+window.onload = loadGo;
+</script>
+
+
+</div></body></html>
